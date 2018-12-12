@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>National Park Lovers!</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow|Roboto" rel="stylesheet">
+    <link href="style.css" rel="stylesheet"> 
+  </head>
+  
+  <body>
+    <header role="banner">
+      <h1 class="page-title">National Parks Trip Planner</h1>
+      <h2 class="title-subtext">Find national parks by state</h2>
+    </header>
+
+    <main role="main">
+      <section role="region" class="js-form">
+        <form id="search-form">
+          <label for="state-search" id="search-label">Enter a two letter state code to search!</label>
+          <input type="text" name="search" id="state-search" placeholder="CA">
+          <input type="submit" id="submit-button">
+        </form>
+      </section>
+
+      <section role="region" class="error-message hidden"></section>
+
+      <section role="region" class="results hidden">
+        <ul id="search-results"></ul>
+      </section>
+    </main>
+  </body>
+</html>
