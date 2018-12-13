@@ -12,14 +12,14 @@
   </head>
   
   <body>
-    <header role="banner">
+    <header role="banner" class="page-banner">
       <h1 class="page-title">National Parks Trip Planner</h1>
       <h2 class="title-subtext">Find national parks by state</h2>
     </header>
 
     <main role="main">
-      <section role="region" class="js-form">
-        <form id="search-form">
+      <section role="region" class="search-form">
+        <form id="js-form">
           <label for="state-search" id="search-label">Enter a two letter state code to search!</label>
           <input type="text" name="search" id="state-search" placeholder="CA">
           <input type="submit" id="submit-button">
@@ -34,3 +34,24 @@
     </main>
   </body>
 </html>
+
+<!-- Error message
+  <p id="error-message">An error has occurred.<br>Please enter a valid 2-letter state code.</p>
+  <button type="button" class="error-restart" value="Restart">
+-->
+
+<!-- Search results
+  <li class="list-item">
+    <a>NPS FULLNAME</a>
+    <p>NPS DESCRIPTION</p>
+  </li>
+-->
+
+<!-- Result information
+  <div class="result-info">
+    <p>Park Cost: NPS PARKCOST</p>
+    <p>Typical Weather: NPS WEATHERINFO </p>
+    <div>Current Forecast: DARKSKY FORECAST RESPONSE</div>
+    <div>Directions: GOOGLEMAPS DIRECTION RESPONSE</div>
+  </div>
+-->
