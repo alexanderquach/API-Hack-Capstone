@@ -21,42 +21,25 @@
       <section role="region" class="search-form">
         <form id="js-form">
           <label for="state-search" id="search-label">Enter a two letter state code to search!</label>
+          <br>
           <input type="text" name="search" id="state-search" placeholder="CA">
           <input type="submit" id="submit-button">
         </form>
       </section>
 
       <section role="region" class="error-message"></section>
+      <div id="map" class="results-map"></div>
 
       <section role="region" class="results hidden">
         <h2>Search Results</h2>
-        <ul id="search-results"></ul>
+        <ul id="search-results">
+        </ul>
       </section>
     </main>
 
     <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb1GvFsH8uPvet0rCZolXxkrzJ--zaQR8"></script>
+    <script src="statestore.js"></script>
     <script src="script.js"></script>
   </body>
 </html>
-
-<!-- Error message
-  <p id="error-message">An error has occurred.<br>Please enter a valid 2-letter state code.</p>
-  <button type="button" class="error-restart" value="Restart">
--->
-
-<!-- Search results
-  <li class="list-item">
-    <a>NPS FULLNAME</a>
-    <p>NPS DESCRIPTION</p>
-  </li>
--->
-
-<!-- Result information
-  <div class="result-info">
-    <p>Park Cost: NPS PARKCOST</p>
-    <p>Typical Weather: NPS WEATHERINFO </p>
-    <div>Current Forecast: DARKSKY FORECAST RESPONSE</div>
-    <div>Directions: GOOGLEMAPS DIRECTION RESPONSE</div>
-    <a>Nearby Restaurants<a>ZOMATO RESPONSE</a>
-  </div>
--->
