@@ -94,7 +94,7 @@ function displayResults(responseJsonNPS) {
       <div class="hidden-results hidden">
       <a href="${responseJsonNPS.data[i].url}">${responseJsonNPS.data[i].url}</a>
       <p>Typical weather: ${responseJsonNPS.data[i].weatherInfo}</p>
-      <ul id="restaurant-list"></ul>
+      <ul id="restaurant-list"><h3>Restaurant List</h3></ul>
       </li>`
     )
     
@@ -117,7 +117,7 @@ function displayMoreInfo(responseJsonZomato, button) {
   for (let i = 0; i < responseJsonZomato.restaurants.length; i++) {
     button.parent().find('#restaurant-list').append(
       `<li>
-      <h3>${responseJsonZomato.restaurants[i].restaurant.name}</h3>
+      <h4>${responseJsonZomato.restaurants[i].restaurant.name}</h4>
       <p>${responseJsonZomato.restaurants[i].restaurant.location.address}</p>
       <a href="${responseJsonZomato.restaurants[i].restaurant.url}">Check it out on Zomato</a>
       </li>`
@@ -132,7 +132,6 @@ function handleMoreInfo() {
     searchZomatoAPI($(this).data("latlon"), $(this));
   });
 };
-
 
 function handleUserSubmit() {
   //Handles user submit for search
