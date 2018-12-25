@@ -1,5 +1,5 @@
 # National Parks Trip Planner
-https://alexanderquach.github.io/API-Hack-Capstone/
+https://alexanderquach.github.io/National-Parks-Planner-API-Capstone/
 
 Motivation: As a nature-lover, national parks and monuments are always on my list of places I want to visit.
 I wanted to create an app more dedicated to helping out with planning trips by allowing users to find national 
