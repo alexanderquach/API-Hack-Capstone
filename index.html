@@ -6,38 +6,105 @@
     <title>National Park Lovers!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <link href="https://necolas.github.io/normalize.css/8.0.1/normalize.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Archivo+Narrow|Roboto" rel="stylesheet">
     <link href="style.css" rel="stylesheet"> 
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" rel="stylesheet">
   </head>
   
   <body>
-    <header role="banner" class="page-banner">
-      <h1 class="page-title">National Parks Trip Planner</h1>
-      <h2 class="title-subtext">Find national parks by state</h2>
-    </header>
+    <div class="container-fluid">
+      <div class="row">
+        <header role="banner" class="page-banner col-lg-12">
+          <h1 class="page-title">National Parks Trip Planner</h1>
+          <h2 class="title-subtext">Find national parks by state</h2>
+        </header>
+      </div>
 
     <main role="main">
-      <section role="region" class="search-form">
-        <form id="js-form">
-          <label for="state-search" id="search-label">Enter a two letter state code to search!</label>
-          <br>
-          <input type="text" name="search" id="state-search" placeholder="CA">
-          <input type="submit" id="submit-button">
-        </form>
-      </section>
+      <div class="row" id="search-div">
+        <section role="region" class="search-form">
+          <form id="js-form" role="search">
+            <div class="form-group">
+              <label for="state-search" id="search-label">Select a state to search! (Select one):</label>
+              <select class="form-control" id="state-search">
+                <option>AL</option>
+                <option>AK</option>
+                <option>AZ</option>
+                <option>AR</option>
+                <option>CA</option>
+                <option>CO</option>
+                <option>CT</option>
+                <option>DE</option>
+                <option>DC</option>
+                <option>FL</option>
+                <option>GA</option>
+                <option>HI</option>
+                <option>ID</option>
+                <option>IL</option>
+                <option>IN</option>
+                <option>IA</option>
+                <option>KS</option>
+                <option>KY</option>
+                <option>LA</option>
+                <option>ME</option>
+                <option>MD</option>
+                <option>MA</option>
+                <option>MI</option>
+                <option>MN</option>
+                <option>MS</option>
+                <option>MO</option>
+                <option>MT</option>
+                <option>NE</option>
+                <option>NV</option>
+                <option>NH</option>
+                <option>NJ</option>
+                <option>NM</option>
+                <option>NY</option>
+                <option>NC</option>
+                <option>ND</option>
+                <option>OH</option>
+                <option>OK</option>
+                <option>OR</option>
+                <option>PA</option>
+                <option>RI</option>
+                <option>SC</option>
+                <option>SD</option>
+                <option>TN</option>
+                <option>TX</option>
+                <option>UT</option>
+                <option>VT</option>
+                <option>VA</option>
+                <option>WA</option>
+                <option>WV</option>
+                <option>WI</option>
+                <option>WY</option>
+              </select>
+              <!-- <input type="text" name="search" id="state-search" placeholder="CA"> -->
+              <input type="submit" id="submit-button" class="btn btn-outline-primary btn-lg">
+          </form>
+        </section>
+      </div>
 
+      <div class="row well well-sm" id="error-div">
       <section role="region" class="error-message"></section>
-      <div id="map" class="results-map"></div>
+      </div>
 
-      <section role="region" class="results hidden">
-        <h2>Search Results</h2>
-        <ul id="search-results">
-        </ul>
-      </section>
-    </main>
+      <div class="row">
+        <div id="map" class="results-map"></div>
+      </div>
 
-    <script src="https://code.jquery.com/jquery-3.3.1.js" integrity="sha256-2Kok7MbOyxpgUVvAk/HJ2jigOSYS2auK4Pfzbm7uH60=" crossorigin="anonymous"></script>
+      <div class="row" id="results-div">
+        <section role="region" class="results hidden">
+          <h2>Search Results</h2>
+          <ul id="search-results">
+          </ul>
+        </section>
+      </div>
+    </div>
+  </main>
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
     <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb1GvFsH8uPvet0rCZolXxkrzJ--zaQR8"></script>
     <script src="statestore.js"></script>
     <script src="script.js"></script>

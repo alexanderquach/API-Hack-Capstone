@@ -35,7 +35,7 @@ function searchNationalParks(query) {
   .catch(error => {
     $('#search-results').empty();
     $('.error-message').html(
-      `<p id="error-message">An error has occurred.<br>Please enter a valid 2-letter state code.</p>`
+      `<p id="error-message">An error has occurred.<br>Please try again.</p>`
     );
   });
 };
@@ -87,12 +87,12 @@ function displayResults(responseJsonNPS) {
 
   for (let i = 0; i < responseJsonNPS.data.length; i++) {
     $('#search-results').append(
-      `<li class="list-item-${i}">
+      `<li>
       <h2 id="data-link">${responseJsonNPS.data[i].fullName}</h2>
-      <p>${responseJsonNPS.data[i].description}</p>
-      <button type="button" id="more-info" data-latlon="${responseJsonNPS.data[i].latLong}">More Info!</button>
+      <p>Description: ${responseJsonNPS.data[i].description}</p>
+      <button type="button" class="btn btn-outline-info" data-latlon="${responseJsonNPS.data[i].latLong}">More Info!</button>
       <div class="hidden-results hidden">
-      <a href="${responseJsonNPS.data[i].url}">${responseJsonNPS.data[i].url}</a>
+      <a href="${responseJsonNPS.data[i].url}">Website: ${responseJsonNPS.data[i].url}</a>
       <p>Typical weather: ${responseJsonNPS.data[i].weatherInfo}</p>
       <ul id="restaurant-list"><h3>Restaurant List</h3></ul>
       </li>`
@@ -125,6 +125,7 @@ function displayMoreInfo(responseJsonZomato, button) {
   };
 }
 
+
 function handleMoreInfo() {
 // Handles user action for more information
   $('#search-results').on('click', 'button', function() {
@@ -133,9 +134,10 @@ function handleMoreInfo() {
   });
 };
 
+
 function handleUserSubmit() {
   //Handles user submit for search
-  console.log('handleUserSubmit ran');
+  // console.log('handleUserSubmit ran');
   $('#js-form').submit(event => {
     event.preventDefault();
     const searchTerm = $('#state-search').val();
