@@ -95,7 +95,7 @@ function displayResults(responseJsonNPS) {
       <p>Description: ${responseJsonNPS.data[i].description}</p>
       <p>Website: <a href="${responseJsonNPS.data[i].url}">${responseJsonNPS.data[i].url}</a></p>
       <p>Typical weather: ${responseJsonNPS.data[i].weatherInfo}</p>
-      <h6 class="list-header">Restaurant List</h6>
+      <h6 class="list-header">Nearby Restaurants:</h6>
       <div class="list-group restaurant-list">
       <ul id="restaurant-list"></ul>
       </div>
