@@ -44,6 +44,10 @@ main {
   text-align: center;
 }
 
+#error-div {
+  margin: 0 auto;
+}
+
 #error-message {
   color: red;
   font-weight: 700;
