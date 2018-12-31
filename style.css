@@ -44,7 +44,7 @@ main {
   text-align: center;
 }
 
-#error-div {
+section.error-message {
   margin: 0 auto;
 }
 

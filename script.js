@@ -142,6 +142,7 @@ function displayMoreInfo(responseJsonZomato, button) {
   };
 }
 
+
 function handleMoreInfo() {
 // Handles user action for more information
   $('#search-results').on('click', 'button', function() {
@@ -149,6 +150,7 @@ function handleMoreInfo() {
     searchZomatoAPI($(this).data("latlon"), $(this));
   });
 };
+
 
 function handleUserSubmit() {
   //Handles user submit for search
