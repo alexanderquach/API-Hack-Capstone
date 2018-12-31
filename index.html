@@ -11,7 +11,7 @@
   </head>
   
   <body>
-    <div class="container-fluid">
+    <div class="container">
       <div class="row">
         <header role="banner" class="page-banner col-lg-12">
           <h1 class="page-title">National Parks Trip Planner</h1>
@@ -23,63 +23,62 @@
       <div class="row" id="search-div">
         <section role="region" class="search-form">
           <form id="js-form" role="search">
-            <div class="form-group">
-              <label for="state-search" id="search-label">Select a state to search! (Select one):</label>
+            <div class="form-group col-sm-12">
+              <label for="state-search" id="search-label">Select a state to search!</label>
               <select class="form-control" id="state-search">
-                <option>AL</option>
-                <option>AK</option>
-                <option>AZ</option>
-                <option>AR</option>
-                <option>CA</option>
-                <option>CO</option>
-                <option>CT</option>
-                <option>DE</option>
-                <option>DC</option>
-                <option>FL</option>
-                <option>GA</option>
-                <option>HI</option>
-                <option>ID</option>
-                <option>IL</option>
-                <option>IN</option>
-                <option>IA</option>
-                <option>KS</option>
-                <option>KY</option>
-                <option>LA</option>
-                <option>ME</option>
-                <option>MD</option>
-                <option>MA</option>
-                <option>MI</option>
-                <option>MN</option>
-                <option>MS</option>
-                <option>MO</option>
-                <option>MT</option>
-                <option>NE</option>
-                <option>NV</option>
-                <option>NH</option>
-                <option>NJ</option>
-                <option>NM</option>
-                <option>NY</option>
-                <option>NC</option>
-                <option>ND</option>
-                <option>OH</option>
-                <option>OK</option>
-                <option>OR</option>
-                <option>PA</option>
-                <option>RI</option>
-                <option>SC</option>
-                <option>SD</option>
-                <option>TN</option>
-                <option>TX</option>
-                <option>UT</option>
-                <option>VT</option>
-                <option>VA</option>
-                <option>WA</option>
-                <option>WV</option>
-                <option>WI</option>
-                <option>WY</option>
+                <option value="AL">Alabama</option>
+                <option value="AK">Alaska</option>
+                <option value="AZ">Arizona</option>
+                <option value="AR">Arkansas</option>
+                <option value="CA">California</option>
+                <option value="CO">Colorado</option>
+                <option value="CT">Connecticut</option>
+                <option value="DE">Delaware</option>
+                <option value="DC">District Of Columbia</option>
+                <option value="FL">Florida</option>
+                <option value="GA">Georgia</option>
+                <option value="HI">Hawaii</option>
+                <option value="ID">Idaho</option>
+                <option value="IL">Illinois</option>
+                <option value="IN">Indiana</option>
+                <option value="IA">Iowa</option>
+                <option value="KS">Kansas</option>
+                <option value="KY">Kentucky</option>
+                <option value="LA">Louisiana</option>
+                <option value="ME">Maine</option>
+                <option value="MD">Maryland</option>
+                <option value="MA">Massachusetts</option>
+                <option value="MI">Michigan</option>
+                <option value="MN">Minnesota</option>
+                <option value="MS">Mississippi</option>
+                <option value="MO">Missouri</option>
+                <option value="MT">Montana</option>
+                <option value="NE">Nebraska</option>
+                <option value="NV">Nevada</option>
+                <option value="NH">New Hampshire</option>
+                <option value="NJ">New Jersey</option>
+                <option value="NM">New Mexico</option>
+                <option value="NY">New York</option>
+                <option value="NC">North Carolina</option>
+                <option value="ND">North Dakota</option>
+                <option value="OH">Ohio</option>
+                <option value="OK">Oklahoma</option>
+                <option value="OR">Oregon</option>
+                <option value="PA">Pennsylvania</option>
+                <option value="RI">Rhode Island</option>
+                <option value="SC">South Carolina</option>
+                <option value="SD">South Dakota</option>
+                <option value="TN">Tennessee</option>
+                <option value="TX">Texas</option>
+                <option value="UT">Utah</option>
+                <option value="VT">Vermont</option>
+                <option value="VA">Virginia</option>
+                <option value="WA">Washington</option>
+                <option value="WV">West Virginia</option>
+                <option value="WI">Wisconsin</option>
+                <option value="WY">Wyoming</option>
               </select>
-              <!-- <input type="text" name="search" id="state-search" placeholder="CA"> -->
-              <input type="submit" id="submit-button" class="btn btn-outline-primary btn-lg">
+              <input type="submit" id="submit-button" class="btn btn-outline-primary">
           </form>
         </section>
       </div>
@@ -88,16 +87,19 @@
       <section role="region" class="error-message"></section>
       </div>
 
-      <div class="row">
-        <div id="map" class="results-map"></div>
-      </div>
-
       <div class="row" id="results-div">
-        <section role="region" class="results hidden">
-          <h2>Search Results</h2>
-          <ul id="search-results">
-          </ul>
-        </section>
+        <div class="results-map col-lg-6 col-sm-12">
+        <div id="map" class="results-map hidden">
+        </div>
+        </div>
+
+        <div class="col-lg-6 col-sm-12" id="results">
+          <section role="region" class="results hidden">
+            <h3>Search Results</h3>
+            <ul id="search-results">
+            </ul>
+          </section>
+        </div>
       </div>
     </div>
   </main>

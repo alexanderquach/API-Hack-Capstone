@@ -19,6 +19,7 @@ function searchNationalParks(query) {
   const params = {
     api_key: apiKeyNPS,
     stateCode: query,
+    fields: 'addresses'
   };
   const queryString = formatQueryParams(params)
   const url = searchURL + '?' + queryString;
@@ -77,7 +78,7 @@ function displayResults(responseJsonNPS) {
   $('#search-results').empty();
   if (responseJsonNPS.total === 0) {
     $('.error-message').html(
-      `<p id="error-message">Is that a state?.<br>Please enter a valid 2-letter state code to try again!</p>`
+      `<p id="error-message">An error has occured, please try again!</p>`
       )
   }
   const map = new google.maps.Map(document.getElementById('map'), {
@@ -88,16 +89,28 @@ function displayResults(responseJsonNPS) {
   for (let i = 0; i < responseJsonNPS.data.length; i++) {
     $('#search-results').append(
       `<li>
-      <h2 id="data-link">${responseJsonNPS.data[i].fullName}</h2>
-      <p>Description: ${responseJsonNPS.data[i].description}</p>
-      <button type="button" class="btn btn-outline-info" data-latlon="${responseJsonNPS.data[i].latLong}">More Info!</button>
+      <h4 id="data-link">${responseJsonNPS.data[i].fullName}</h4>
+      <button type="button" class="btn btn-outline-info btn-sm" data-latlon="${responseJsonNPS.data[i].latLong}" id="more-info">More Info!</button>
       <div class="hidden-results hidden">
-      <a href="${responseJsonNPS.data[i].url}">Website: ${responseJsonNPS.data[i].url}</a>
+      <p>Description: ${responseJsonNPS.data[i].description}</p>
+      <p>Website: <a href="${responseJsonNPS.data[i].url}">${responseJsonNPS.data[i].url}</a></p>
       <p>Typical weather: ${responseJsonNPS.data[i].weatherInfo}</p>
-      <ul id="restaurant-list"><h3>Restaurant List</h3></ul>
+      <h6 class="list-header">Restaurant List</h6>
+      <div class="list-group restaurant-list">
+      <ul id="restaurant-list"></ul>
+      </div>
       </li>`
     )
-    
+
+    const contentString = '<div id="content">'+
+      `<h5>${responseJsonNPS.data[i].fullName}</h5>`+
+      `<a href="${responseJsonNPS.data[i].directionsUrl}" target="_blank">Directions</a>`
+      '</div>';
+
+    const infowindow = new google.maps.InfoWindow({
+      content: contentString
+    });
+
     let [lat, lng] = responseJsonNPS.data[i].latLong.split(', ').map(pos => pos.substring(pos.indexOf(':') + 1, pos.length))
     const latLon = {
       lat: parseFloat(lat),
@@ -108,7 +121,11 @@ function displayResults(responseJsonNPS) {
       map: map,
       title: `${responseJsonNPS.data[i].fullName}`
     });
+    marker.addListener('click', function() {
+      infowindow.open(map, marker);
+    });
   };
+  $('.results-map').removeClass('hidden');
   $('.results').removeClass('hidden');
 };
 
@@ -116,15 +133,14 @@ function displayMoreInfo(responseJsonZomato, button) {
   // console.log(responseJsonZomato.restaurants)
   for (let i = 0; i < responseJsonZomato.restaurants.length; i++) {
     button.parent().find('#restaurant-list').append(
-      `<li>
-      <h4>${responseJsonZomato.restaurants[i].restaurant.name}</h4>
-      <p>${responseJsonZomato.restaurants[i].restaurant.location.address}</p>
-      <a href="${responseJsonZomato.restaurants[i].restaurant.url}">Check it out on Zomato</a>
+      `<li class="restaurant-item list-group-item">
+      <h5>${responseJsonZomato.restaurants[i].restaurant.name}</h5>
+      <p>Address: ${responseJsonZomato.restaurants[i].restaurant.location.address}</p>
+      <a href="${responseJsonZomato.restaurants[i].restaurant.url}" target="_blank"><button type="button" class="btn btn-outline-danger btn-sm">Check it out on Zomato</button></a>
       </li>`
     );
   };
 }
-
 
 function handleMoreInfo() {
 // Handles user action for more information
@@ -133,7 +149,6 @@ function handleMoreInfo() {
     searchZomatoAPI($(this).data("latlon"), $(this));
   });
 };
-
 
 function handleUserSubmit() {
   //Handles user submit for search
