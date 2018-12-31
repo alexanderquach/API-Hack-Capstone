@@ -10,14 +10,34 @@ Languages/technologies used: HTML / CSS / JavaScript / jQuery / Bootstrap
 
 APIs used: National Park Service / Google Maps / Zomato
 
+<hr>
+
 Start screen:
-<img src="Screen Shot 2018-12-24 at 11.03.31 PM.png">
+<img src="/Screenshots/Start Screen.png">
 
-Map with search results:
-<img src="Screen Shot 2018-12-24 at 11.04.01 PM.png">
+Search results:
+<img src="/Screenshots/Search Results.png">
 
-Listed search results:
-<img src="Screen Shot 2018-12-24 at 11.04.19 PM.png">
+More information:
+<img src="/Screenshots/More Info.png">
 
 List of restaurants:
-<img src="Screen Shot 2018-12-24 at 11.04.36 PM.png">
+<img src="/Screenshots/Restaurant List.png">
+
+Map markers:
+<img src="/Screenshots/Map Marker.png">
+
+<hr>
+
+Start screen (mobile):
+<img src="/Screenshots/Start Screen Mobile.png">
+
+Search results (mobile):
+<img src="/Screenshots/Search Results Mobile1.png">
+<img src="/Screenshots/Search Results Mobile2.png">
+
+More information (mobile):
+<img src="/Screenshots/More Info Mobile.png">
+
+<hr>
+Special thanks to Wojciech Kwiatek for all the guidance!
