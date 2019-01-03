@@ -76,7 +76,7 @@ div .form-group {
 }
 
 #search-results li {
-  margin-bottom: 5px;
+  height: 100%;
 }
 
 .results {
@@ -96,14 +96,13 @@ div .form-group {
   overflow: scroll;
 }
 
-#more-info {
-  margin-left: 10px;
-}
-
 #restaurant-list {
-padding: 0;
-max-height: 300px;
-overflow: scroll;
+  padding: 0;
+  max-height: 300px;
+  overflow-y: scroll;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-auto-rows: 1fr;
 }
 
 #state-search {
@@ -119,5 +118,17 @@ h6.list-header {
 }
 
 #restaurant-item {
-  display: inline-block;
+  padding: 0 5px;
+}
+
+@media only screen and (min-width: 420px) {
+  #restaurant-list {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  #restaurant-list {
+    grid-template-columns: repeat(3, 1fr);
+  }
 }

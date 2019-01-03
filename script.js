@@ -72,6 +72,9 @@ function searchZomatoAPI(location, button) {
     });
 };
 
+let previnfowindow = null;
+let previnfowindowA = null; 
+
 function displayResults(responseJsonNPS) {
   //Displays results of the response from NPS API
   // console.log(responseJsonNPS);
@@ -158,22 +161,29 @@ function displayResults(responseJsonNPS) {
     });
 
     marker.addListener('click', function() {
-      // .close() currently does not work for this, not sure why
-      // Tried using if/else statement as well, but still didn't work
-
-      // infowindow.close();
-      // infowindowA.close();
+      if (previnfowindow) {
+        previnfowindow.close();
+      };
+      if (previnfowindowA) {
+        previnfowindowA.close();
+      };
       if (responseJsonNPS.data[i].directionsUrl === "") {
-        infowindowA.open(map, marker)
+        infowindowA.open(map, marker);
+        previnfowindowA = infowindowA
       }
       else {
-        infowindow.open(map, marker)
+        infowindow.open(map, marker);
+        previnfowindow = infowindow
       };
     });
     
     map.addListener('click', function() {
-      infowindow.close();
-      infowindowA.close();
+      if (infowindow) {
+        infowindow.close();
+      };
+      if (infowindowA) {
+        infowindowA.close();
+      };
     });
   };
   $('.results-map').removeClass('hidden');
@@ -184,8 +194,8 @@ function displayMoreInfo(responseJsonZomato, button) {
   // console.log(responseJsonZomato.restaurants)
   for (let i = 0; i < responseJsonZomato.restaurants.length; i++) {
     button.parent().find('#restaurant-list').append(
-      `<div class="col-xs-12 col-sm-6 col-md-4" id="restaurant-item">
-        <li class="list-group-item">
+      `<div id="restaurant-item">
+        <li class="list-group-item restaurant-item">
           <h5>${responseJsonZomato.restaurants[i].restaurant.name}</h5>
           <p>Address: ${responseJsonZomato.restaurants[i].restaurant.location.address}</p>
           <a href="${responseJsonZomato.restaurants[i].restaurant.url}" target="_blank"><button type="button" class="btn btn-outline-danger btn-sm">Zomato</button></a>
