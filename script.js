@@ -81,34 +81,68 @@ function displayResults(responseJsonNPS) {
       `<p id="error-message">An error has occured, please try again!</p>`
       )
   }
+  
   const map = new google.maps.Map(document.getElementById('map'), {
       zoom: 6,
       center: STATE[$('#state-search').val()]
     });
 
   for (let i = 0; i < responseJsonNPS.data.length; i++) {
-    $('#search-results').append(
+    if (responseJsonNPS.data[i].weatherInfo === "") {
+      $('#search-results').append(
       `<li>
-      <h4 id="data-link">${responseJsonNPS.data[i].fullName}</h4>
-      <button type="button" class="btn btn-outline-info btn-sm" data-latlon="${responseJsonNPS.data[i].latLong}" id="more-info">More Info!</button>
-      <div class="hidden-results hidden">
-      <p>Description: ${responseJsonNPS.data[i].description}</p>
-      <p>Website: <a href="${responseJsonNPS.data[i].url}">${responseJsonNPS.data[i].url}</a></p>
-      <p>Typical weather: ${responseJsonNPS.data[i].weatherInfo}</p>
-      <h6 class="list-header">Nearby Restaurants:</h6>
-      <div class="list-group restaurant-list">
-      <ul id="restaurant-list"></ul>
-      </div>
+        <h4 id="data-link">${responseJsonNPS.data[i].fullName}</h4>
+        <button type="button" class="btn btn-outline-info btn-sm" data-latlon="${responseJsonNPS.data[i].latLong}" id="more-info">More Info!</button>
+        <div class="hidden-results hidden">
+          <p>Description: ${responseJsonNPS.data[i].description}</p>
+          <p>Website: <a href="${responseJsonNPS.data[i].url}">${responseJsonNPS.data[i].url}</a></p>
+          <p>Typical weather: No data available</p>
+          <h6 class="list-header">Restaurant List</h6>
+          <div class="container-fluid" id="restaurant-div">
+            <div class="list-group restaurant-list">
+              <ul id="restaurant-list"></ul>
+            </div>
+          </div>
+        </div>
       </li>`
-    )
+      )
+    }
+    else {
+      $('#search-results').append(
+      `<li>
+        <h4 id="data-link">${responseJsonNPS.data[i].fullName}</h4>
+        <button type="button" class="btn btn-outline-info btn-sm" data-latlon="${responseJsonNPS.data[i].latLong}" id="more-info">More Info!</button>
+        <div class="hidden-results hidden">
+          <p>Description: ${responseJsonNPS.data[i].description}</p>
+          <p>Website: <a href="${responseJsonNPS.data[i].url}">${responseJsonNPS.data[i].url}</a></p>
+          <p>Typical weather: ${responseJsonNPS.data[i].weatherInfo}</p>
+          <h6 class="list-header">Restaurant List</h6>
+          <div class="container-fluid" id="restaurant-div">
+            <div class="list-group restaurant-list">
+              <ul id="restaurant-list"></ul>
+            </div>
+          </div>
+        </div>
+      </li>`
+      )
+    }
 
     const contentString = '<div id="content">'+
       `<h5>${responseJsonNPS.data[i].fullName}</h5>`+
-      `<a href="${responseJsonNPS.data[i].directionsUrl}" target="_blank">Directions</a>`
+      `<a href="${responseJsonNPS.data[i].directionsUrl}" target="_blank">Directions</a>`+
       '</div>';
 
     const infowindow = new google.maps.InfoWindow({
       content: contentString
+    });
+
+    const contentStringA =  '<div id="content">'+
+      `<h5>${responseJsonNPS.data[i].fullName}</h5>`+
+      '<a href="https://www.google.com/maps" target="_blank">Directions</a>'+
+      '</div>';
+
+    const infowindowA = new google.maps.InfoWindow({
+      content: contentStringA
     });
 
     let [lat, lng] = responseJsonNPS.data[i].latLong.split(', ').map(pos => pos.substring(pos.indexOf(':') + 1, pos.length))
@@ -116,13 +150,30 @@ function displayResults(responseJsonNPS) {
       lat: parseFloat(lat),
       lng: parseFloat(lng)
     };
+
     const marker = new google.maps.Marker({
       position: latLon,
       map: map,
       title: `${responseJsonNPS.data[i].fullName}`
     });
+
     marker.addListener('click', function() {
-      infowindow.open(map, marker);
+      // .close() currently does not work for this, not sure why
+      // Tried using if/else statement as well, but still didn't work
+
+      // infowindow.close();
+      // infowindowA.close();
+      if (responseJsonNPS.data[i].directionsUrl === "") {
+        infowindowA.open(map, marker)
+      }
+      else {
+        infowindow.open(map, marker)
+      };
+    });
+    
+    map.addListener('click', function() {
+      infowindow.close();
+      infowindowA.close();
     });
   };
   $('.results-map').removeClass('hidden');
@@ -133,15 +184,16 @@ function displayMoreInfo(responseJsonZomato, button) {
   // console.log(responseJsonZomato.restaurants)
   for (let i = 0; i < responseJsonZomato.restaurants.length; i++) {
     button.parent().find('#restaurant-list').append(
-      `<li class="restaurant-item list-group-item">
-      <h5>${responseJsonZomato.restaurants[i].restaurant.name}</h5>
-      <p>Address: ${responseJsonZomato.restaurants[i].restaurant.location.address}</p>
-      <a href="${responseJsonZomato.restaurants[i].restaurant.url}" target="_blank"><button type="button" class="btn btn-outline-danger btn-sm">Check it out on Zomato</button></a>
-      </li>`
+      `<div class="col-xs-12 col-sm-6 col-md-4" id="restaurant-item">
+        <li class="list-group-item">
+          <h5>${responseJsonZomato.restaurants[i].restaurant.name}</h5>
+          <p>Address: ${responseJsonZomato.restaurants[i].restaurant.location.address}</p>
+          <a href="${responseJsonZomato.restaurants[i].restaurant.url}" target="_blank"><button type="button" class="btn btn-outline-danger btn-sm">Zomato</button></a>
+        </li>
+      </div>`
     );
   };
 }
-
 
 function handleMoreInfo() {
 // Handles user action for more information
@@ -150,7 +202,6 @@ function handleMoreInfo() {
     searchZomatoAPI($(this).data("latlon"), $(this));
   });
 };
-
 
 function handleUserSubmit() {
   //Handles user submit for search

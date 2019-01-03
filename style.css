@@ -44,10 +44,6 @@ main {
   text-align: center;
 }
 
-section.error-message {
-  margin: 0 auto;
-}
-
 #error-message {
   color: red;
   font-weight: 700;
@@ -116,4 +112,12 @@ overflow: scroll;
 
 h6.list-header {
   color: #dc3545;
+}
+
+#restaurant-div {
+  padding: 0;
+}
+
+#restaurant-item {
+  display: inline-block;
 }
